@@ -1,4 +1,4 @@
-import 'dart:ui';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,7 +7,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-import 'package:device_preview/device_preview.dart';
 
 import 'package:todo_app_kudhse/models/task.dart';
 import 'package:todo_app_kudhse/providers/task_provider.dart';
@@ -15,13 +14,13 @@ import 'package:todo_app_kudhse/screens/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // final Directory dir = await getApplicationDocumentsDirectory();
-  // final String path = dir.path;
-//  await Hive.initFlutter(path);
+  final Directory dir = await getApplicationDocumentsDirectory();
+  final String path = dir.path;
+  await Hive.initFlutter(path);
   await SystemChrome.setPreferredOrientations(
     [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
   );
-  await Hive.initFlutter();
+  // await Hive.initFlutter();
 
   Hive.registerAdapter<Task>(TaskAdapter());
   await Hive.openBox<Task>(TaskProvider.boxName);
