@@ -18,7 +18,6 @@ class QuoteWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Flexible(
-            // width: 300,
             child: Text(
               quote,
               style: TextStyle(
@@ -30,9 +29,6 @@ class QuoteWidget extends StatelessWidget {
             ),
           ),
           Flexible(
-            // color: Colors.blueAccent,
-            // width: 250,
-            // alignment: Alignment.centerRight,
             child: Text(
               quoteBy,
               style: TextStyle(

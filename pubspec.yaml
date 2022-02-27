@@ -26,7 +26,7 @@ dependencies:
   date_picker_timeline: ^1.2.3
   animated_splash_screen: ^1.2.0
   responsive_framework: ^0.1.7
-  device_preview: ^1.0.0
+  
   
   
   
@@ -44,7 +44,7 @@ dev_dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/launcher_icon_final.png"
+  image_path: "assets/images/calendar1.png"
 
 flutter:
   assets:

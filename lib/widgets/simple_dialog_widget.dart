@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+
 import 'package:todo_app_kudhse/constants.dart';
 import 'package:todo_app_kudhse/models/task.dart';
 import 'package:todo_app_kudhse/providers/task_provider.dart';
@@ -45,8 +46,6 @@ class _DiaState extends State<Dia> {
     iniTcompletedOn = widget.passedTask?.completedOn;
     iniTisImp = widget.passedTask?.isImportant;
     iniTisFinished = widget.passedTask?.isFinished;
-    // print(widget.passedTask?.taskName);
-
     super.initState();
   }
 
@@ -54,7 +53,7 @@ class _DiaState extends State<Dia> {
   Widget build(BuildContext context) {
     TaskProvider tskProvider =
         Provider.of<TaskProvider>(context, listen: false);
-    print('whole dialog called');
+
     return SimpleDialog(
       backgroundColor: Theme.of(context).canvasColor,
       contentPadding: const EdgeInsets.all(10),
@@ -162,8 +161,6 @@ class _DiaState extends State<Dia> {
               },
               child: Text(
                 iniTdeadLineDate ?? tskProvider.stringOfSelectedDate,
-                // iniTdeadLineDate ??
-                //     DateFormat('dd-MM-yyyy').format(DateTime.now()),
                 style: kAddTaskDialogDateTimeDisplayStyle,
               ),
             ),
@@ -174,10 +171,7 @@ class _DiaState extends State<Dia> {
                     newTask = initTaskName!;
                   }
                   newTask.isEmpty ? validate = true : validate = false;
-
                   if (validate == false & newTask.isNotEmpty) {
-                    print('widget.index= ${widget.index}');
-
                     if (widget.passedTask == null) {
                       final DateTime currentDate = DateTime.now();
                       final String currentTime =
@@ -193,7 +187,6 @@ class _DiaState extends State<Dia> {
                         isImprtnt: isImportant,
                       );
                     } else {
-                      print('widget.index= ${widget.index}');
                       tskProvider.editTask(
                         taskId: widget.passedTask!.taskId,
                         edititedTask: Task(

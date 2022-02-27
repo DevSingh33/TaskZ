@@ -31,14 +31,15 @@ class Task {
   @HiveField(9)
   bool isFinished;
 
-  Task(
-      {required this.createdTime,
-      required this.deadLineDate,
-      required this.deadLineTime,
-      required this.taskName,
-      required this.createdDate,
-      required this.taskId,
-      required this.completedOn,
-      this.isFinished = false,
-      this.isImportant = false});
+  Task({
+    required this.createdTime,
+    required this.deadLineDate,
+    required this.deadLineTime,
+    required this.taskName,
+    required this.createdDate,
+    required this.taskId,
+    required this.completedOn,
+    this.isFinished = false,
+    this.isImportant = false,
+  });
 }

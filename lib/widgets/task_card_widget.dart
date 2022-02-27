@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:percent_indicator/percent_indicator.dart';
+
 import 'package:todo_app_kudhse/constants.dart';
 import 'package:todo_app_kudhse/models/task.dart';
 import 'package:todo_app_kudhse/providers/task_provider.dart';
 import 'package:todo_app_kudhse/widgets/simple_dialog_widget.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 
 class TaskCard extends StatelessWidget {
   TaskCard({
@@ -28,12 +29,9 @@ class TaskCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<TaskProvider>(context, listen: true);
-    // provider.sortTaskByDate(provider.objectOfSelectedDate);
     finalTskList = isImp ? provider.getPriortyList : provider.getOtherTaskList;
     percentValue = provider.currentFinishedTaskCount(finalTskList) /
         provider.currentTotalTaskCount(finalTskList);
-    print('whole task card called');
-
     return Card(
       color: cardMaxColor,
       margin: kCardMargin,
@@ -49,12 +47,6 @@ class TaskCard extends StatelessWidget {
           borderRadius: BorderRadius.all(
             Radius.circular(10),
           ),
-          // gradient: LinearGradient(
-          //   colors: [cardSideColor.withOpacity(0.95), cardMaxColor],
-          //   begin: Alignment.centerLeft,
-          //   end: Alignment.centerRight,
-          //   stops: const [0.11, 0],
-          // ),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -62,7 +54,6 @@ class TaskCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Row(
-              // mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
@@ -72,7 +63,6 @@ class TaskCard extends StatelessWidget {
                     backgroundColor: cardSideColor.withOpacity(0.4),
                     progressColor: cardSideColor,
                     barRadius: const Radius.circular(30),
-                    // percent: 0.8,
                     percent: percentValue.isNaN ? 0.00 : percentValue,
                     lineHeight: 22,
                     center: Text(
@@ -84,7 +74,6 @@ class TaskCard extends StatelessWidget {
               ],
             ),
             Expanded(
-              //    flex: 6,
               child: finalTskList.isEmpty
                   ? Center(child: placeholderWidget)
                   : Consumer<TaskProvider>(
@@ -99,9 +88,6 @@ class TaskCard extends StatelessWidget {
                               thickness: 1.5,
                               indent: 14,
                               endIndent: 14,
-                              // indent: 30,
-                              // endIndent: 8.4,
-
                               color: cardSideColor.withOpacity(0.1),
                             );
                           },
@@ -111,8 +97,7 @@ class TaskCard extends StatelessWidget {
                               finalTskList[index],
                             ),
                             onDismissed: (direction) {
-                              // tskProvider.removeTask(indx: index);
-                              tskProvider.removeTask(
+                              tskProvider.removeSingleTask(
                                 id: finalTskList[index].taskId,
                                 taskTitle: finalTskList[index].taskName,
                               );
@@ -137,7 +122,6 @@ class TaskCard extends StatelessWidget {
                               key: ValueKey(
                                 finalTskList[index],
                               ),
-                              // /    dense: true,
                               minVerticalPadding: 0,
                               contentPadding: const EdgeInsets.only(
                                 top: 0,
@@ -165,14 +149,12 @@ class TaskCard extends StatelessWidget {
                                   width: 60,
                                   height: 60,
                                   decoration: BoxDecoration(
-                                    // color: Color(0xffffc971),
                                     color: Theme.of(context).primaryColorLight,
                                     shape: BoxShape.circle,
                                     border: Border.all(
                                       color: cardMaxColor,
                                       width: 4,
                                     ),
-                                    // borderRadius: BorderRadius.circular(90),
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(2.0),
@@ -186,7 +168,6 @@ class TaskCard extends StatelessWidget {
                                 ),
                               ),
                               textColor: cardSideColor,
-                              // textColor: Theme.of(context).primaryColorDark,
                               title: InkWell(
                                 splashColor: cardMaxColor,
                                 onTap: () {
@@ -210,22 +191,14 @@ class TaskCard extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              // subtitle: Text(
-                              //   finalTskList[index].createdDate.toString(),
-                              //   style: kDeadLineDateStyle,
-                              // ),
                               trailing: Checkbox(
                                 value: finalTskList[index].isFinished,
-                                //   checkColor: Colors.white,
-                                // activeColor: Theme.of(context).primaryColor,
                                 activeColor: cardSideColor,
-
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30),
                                 ),
                                 side: BorderSide(
                                   color: cardSideColor,
-                                  // color: Theme.of(context).primaryColor,
                                 ),
                                 onChanged: (newValue) {
                                   tskProvider.toggleTask(
@@ -234,7 +207,6 @@ class TaskCard extends StatelessWidget {
                                     completeOnDate: DateTime.now(),
                                     newVal: newValue ?? false,
                                   );
-                                  //  finalTskList[index].isFinished = newValue ?? false;
                                 },
                               ),
                             ),

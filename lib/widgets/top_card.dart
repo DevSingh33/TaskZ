@@ -1,14 +1,12 @@
-import 'dart:ui';
-import 'package:date_picker_timeline/extra/style.dart';
 import 'package:flutter/material.dart';
+import 'package:date_picker_timeline/extra/style.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
+
 import 'package:todo_app_kudhse/constants.dart';
 import 'package:todo_app_kudhse/providers/task_provider.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
-
-//import 'package:calendar_timeline/calendar_timeline.dart';
 
 class TopCardWithDate extends StatefulWidget {
   const TopCardWithDate({
@@ -22,24 +20,18 @@ class TopCardWithDate extends StatefulWidget {
 
 class _TopCardWithDateState extends State<TopCardWithDate> {
   double percentValue = 0.05;
-  final DatePickerController _datePickerController = DatePickerController();
+
   DateTime? selectedDate = DateTime.now();
   bool isDateTimePickerSelected = false;
   bool _isElevated = true;
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     var provider = Provider.of<TaskProvider>(context, listen: true);
     percentValue = provider.getTotalDoneTaskCount / provider.getTotalTaskCount;
-    print('whole top card called');
+
     return Card(
       margin: kCardMargin,
-
       elevation: 4,
       shadowColor: widget.topCardColor,
       shape: const RoundedRectangleBorder(
@@ -48,8 +40,6 @@ class _TopCardWithDateState extends State<TopCardWithDate> {
         ),
       ),
       color: widget.topCardColor,
-      // color: Colors.transparent,
-      // child: OldWidget(selectedDate: selectedDate),
       child: Padding(
         padding: const EdgeInsets.only(
           top: 2,
@@ -61,9 +51,6 @@ class _TopCardWithDateState extends State<TopCardWithDate> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // const SizedBox(
-            //   width: 8,
-            // ),
             Expanded(
               flex: 1,
               child: AnimatedContainer(
@@ -72,7 +59,6 @@ class _TopCardWithDateState extends State<TopCardWithDate> {
                 padding: const EdgeInsets.all(6),
                 margin: const EdgeInsets.all(2),
                 decoration: BoxDecoration(
-                    //  color: Color(0xffffd900),
                     color: isDateTimePickerSelected
                         ? Theme.of(context).primaryColor
                         : const Color(0xffffd900),
@@ -107,12 +93,6 @@ class _TopCardWithDateState extends State<TopCardWithDate> {
                         _isElevated = false;
                       });
                     } else {
-                      // showDialog(
-                      //     context: context,
-                      //     builder: (ctx) => AlertDialog(
-                      //           title: Text('Select From Picker'),
-                      //         ));
-
                       return;
                     }
                     provider.sortTaskByDate(selectedDate ?? DateTime.now());
@@ -152,11 +132,9 @@ class _TopCardWithDateState extends State<TopCardWithDate> {
             Expanded(
               flex: 3,
               child: Container(
-                //  padding: const EdgeInsets.all(1),
-                //height: MediaQuery.of(context).size.height * 0.2,
                 decoration: BoxDecoration(
-                    //    border: Border.all(width: 1, color: Colors.deepPurple),
-                    borderRadius: BorderRadius.circular(10)),
+                  borderRadius: BorderRadius.circular(10),
+                ),
                 child: DatePicker(
                   DateTime.now().subtract(const Duration(days: 2)),
                   height: MediaQuery.of(context).size.height * 0.11,
@@ -178,7 +156,6 @@ class _TopCardWithDateState extends State<TopCardWithDate> {
                   selectedTextColor:
                       isDateTimePickerSelected ? Colors.black : Colors.white,
                   initialSelectedDate: selectedDate,
-                  controller: _datePickerController,
                   onDateChange: (selDate) {
                     if (selectedDate != null) {
                       setState(() {
@@ -186,7 +163,6 @@ class _TopCardWithDateState extends State<TopCardWithDate> {
                         _isElevated = true;
                         selectedDate = selDate;
                       });
-
                       provider.sortTaskByDate(selectedDate!);
                     } else {
                       setState(() {
@@ -202,14 +178,12 @@ class _TopCardWithDateState extends State<TopCardWithDate> {
             Expanded(
               flex: 1,
               child: Container(
-                // height: MediaQuery.of(context).size.height * 0.2,
                 padding: const EdgeInsets.only(top: 2, bottom: 2, left: 8),
                 child: FittedBox(
                   child: CircularPercentIndicator(
                     radius: 36,
                     lineWidth: 8,
                     animation: true,
-                    // animationDuration: 1000,
                     animateFromLastPercent: true,
                     percent: percentValue.isNaN ? 0.00 : percentValue,
                     circularStrokeCap: CircularStrokeCap.round,

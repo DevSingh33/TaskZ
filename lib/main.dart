@@ -32,17 +32,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-    //     overlays: [SystemUiOverlay.bottom]);
-    print('whole app rebuild');
     return ChangeNotifierProvider(
       create: (context) => TaskProvider(),
       child: MaterialApp(
         builder: (context, widget) {
           return ResponsiveWrapper.builder(
             BouncingScrollWrapper.builder(context, widget!),
-            // maxWidth: 1200,
-            // minWidth: 400,
             defaultScale: true,
             breakpoints: [
               const ResponsiveBreakpoint.resize(600, name: MOBILE),
@@ -52,14 +47,10 @@ class MyApp extends StatelessWidget {
             ],
           );
         },
-
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
-        // theme: ThemeData.dark(),
         theme: ThemeData(
-          // canvasColor: Colors.pinkAccent[100],
           canvasColor: const Color(0xffd1faff),
-          // primarySwatch: Colors.deepPurple,
           primaryColor: const Color(0xff0c89dd),
         ),
         home: AnimatedSplashScreen(
@@ -74,28 +65,29 @@ class MyApp extends StatelessWidget {
                   height: 100,
                   width: 100,
                   child: Image.asset(
-                    'assets/images/bg_removed.png',
+                    'assets/images/calendar1.png',
                   ),
                 ),
-                const Spacer(),
+                // const Spacer(),
                 const Text(
                   'TaskZ',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: 'Kaushan Script',
-                    fontSize: 30,
+                    fontSize: 40,
+                    letterSpacing: 2.5,
                     fontWeight: FontWeight.w900,
-                    color: Color(0xffffd900),
+                    color: Color(0xff49b6ff),
+                    // color: Color(0xffffd900),
                   ),
                 ),
               ],
             ),
           ),
-          backgroundColor: const Color(0xff49b6ff),
+          backgroundColor: Colors.amber,
           // centered: true,
           nextScreen: const HomeScreen(),
           splashTransition: SplashTransition.slideTransition,
-
           splashIconSize: 160,
         ),
       ),

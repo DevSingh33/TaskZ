@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
+
 import 'package:todo_app_kudhse/models/task.dart';
 import 'package:todo_app_kudhse/providers/task_provider.dart';
-import 'package:intl/intl.dart';
 
 import '../constants.dart';
 
@@ -21,7 +22,6 @@ class CompletedTasksScreen extends StatelessWidget {
       backgroundColor: wholeColor,
       appBar: AppBar(
         title: const Text('All Completed Tasks'),
-        //  leading: IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back)),
       ),
       body: Column(children: [
         Expanded(
@@ -59,7 +59,7 @@ class CompletedTasksScreen extends StatelessWidget {
                     ),
                     onPressed: () {
                       Provider.of<TaskProvider>(context, listen: false)
-                          .removeTask(
+                          .removeSingleTask(
                               id: completedTaskList[index].taskId,
                               taskTitle: completedTaskList[index].taskName);
                     },
@@ -69,7 +69,6 @@ class CompletedTasksScreen extends StatelessWidget {
         ),
       ]),
       bottomNavigationBar: BottomAppBar(
-        // notchMargin: 100,
         color: Colors.red,
         child: TextButton(
           onPressed: () {
@@ -115,7 +114,6 @@ class CompletedTasksScreen extends StatelessWidget {
           ),
         ),
       ),
-      // //  endDrawer: Drawer(),
     );
   }
 }

@@ -8,9 +8,7 @@ class FABWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('FAB PRESSED');
     return FloatingActionButton(
-      // heroTag: 'main',
       backgroundColor: const Color(0xffffd900),
       splashColor: Colors.pinkAccent,
       foregroundColor: Colors.white,

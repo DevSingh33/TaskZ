@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:todo_app_kudhse/screens/completed_task_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -35,14 +36,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
         child: BottomNavigationBar(
           elevation: 0,
           backgroundColor: Colors.transparent,
-          // selectedItemColor: Theme.of(context).colorScheme.onSurface,
           selectedItemColor: Colors.white,
           unselectedItemColor: Colors.white70,
           onTap: (index) => changeScreen(index),
           iconSize: 24,
           unselectedFontSize: 14,
           selectedFontSize: 16,
-
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.task_alt_rounded),
@@ -54,7 +53,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
               icon: Icon(Icons.done_all),
               label: 'CompletedTask',
             ),
-            //   BottomNavigationBarItem(icon: Icon(Icons.task), label: 'Delete'),
           ],
         ),
       ),
