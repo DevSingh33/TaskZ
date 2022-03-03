@@ -163,6 +163,7 @@ class _TopCardWithDateState extends State<TopCardWithDate> {
                         _isElevated = true;
                         selectedDate = selDate;
                       });
+
                       provider.sortTaskByDate(selectedDate!);
                     } else {
                       setState(() {

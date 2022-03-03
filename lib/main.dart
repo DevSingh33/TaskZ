@@ -23,7 +23,6 @@ void main() async {
   // await Hive.initFlutter();
 
   Hive.registerAdapter<Task>(TaskAdapter());
-  await Hive.openBox<Task>(TaskProvider.boxName);
   runApp(const MyApp());
 }
 
