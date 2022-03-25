@@ -1,4 +1,4 @@
-# TaskZ (Simple Todo List App)
+# TaskZ (Minimal + Offline TODO List App)
 
 Minimal App With Offline Storage(Using HIVE) Functionality. 
 
